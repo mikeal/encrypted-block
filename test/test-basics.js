@@ -18,8 +18,8 @@ describe('encrypted-block', () => {
     const eBlock = await Block.encode({ value: encrypted, codec: eb, hasher })
     same(Buffer.compare(Buffer.from(value), Buffer.from(eBlock.bytes)) !== 0, true)
 
-    const { value: val } = await Block.decode({ ...eBlock, codec: eb, hasher })
-    const { cid, bytes } = await decrypt({ value: val })
+    const { value: { bytes: val, iv } } = await Block.decode({ ...eBlock, codec: eb, hasher })
+    const { cid, bytes } = await decrypt({ value: val, iv })
     const dBlock = await Block.decode({ cid, bytes, codec: raw, hasher })
     same([...dBlock.value], [...value])
   })
