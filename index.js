@@ -25,12 +25,14 @@ const decode = bytes => bytes
 
 const code = 0x300000 + 1337
 
+const concat = buffers => Uint8Array.from(buffers.map(b => [...b]).flat())
+
 const decrypt = async ({ key, value }) => {
   let bytes = value
   const iv = bytes.subarray(0, 12)
   bytes = bytes.slice(12)
-  bytes = await aes.decrypt(bytes, key, {name: 'AES-GCM', iv, tagLength: 16})
-  const len = readUInt32LE(bytes.subarray(0,4))
+  bytes = await aes.decrypt(bytes, key, { name: 'AES-GCM', iv, tagLength: 16 })
+  const len = readUInt32LE(bytes.subarray(0, 4))
   const cid = CID.decode(bytes.subarray(4, 4 + len))
   bytes = bytes.subarray(4 + len)
   return { cid, bytes }
@@ -38,14 +40,14 @@ const decrypt = async ({ key, value }) => {
 const encrypt = async ({ key, cid, bytes }) => {
   const len = enc32(cid.bytes.byteLength)
   const iv = randomBytes(12)
-  const msg = Buffer.concat([ len, cid.bytes, bytes ])
-  bytes = await aes.encrypt(msg, key, {name: 'AES-GCM', iv, tagLength: 16})
-  const value = Buffer.concat([ iv, bytes ])
+  const msg = concat([len, cid.bytes, bytes])
+  bytes = await aes.encrypt(msg, key, { name: 'AES-GCM', iv, tagLength: 16 })
+  const value = concat([iv, bytes])
   return { value }
 }
 
 const crypto = key => {
-  return { encrypt: opts => encrypt({ key, ...opts}), decrypt: opts => decrypt({ key, ...opts}) }
+  return { encrypt: opts => encrypt({ key, ...opts }), decrypt: opts => decrypt({ key, ...opts }) }
 }
 
 const name = 'mikeal@encrypted-block:aes-gcm'
