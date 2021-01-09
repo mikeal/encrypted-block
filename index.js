@@ -31,8 +31,8 @@ const code = 0x300000 + 1337
 
 const concat = buffers => Uint8Array.from(buffers.map(b => [...b]).flat())
 
-const decrypt = async ({ key, iv, value }) => {
-  let bytes = value
+const decrypt = async ({ key, value }) => {
+  let { bytes, iv } = value
   bytes = await aes.decrypt(bytes, key, { name: 'AES-GCM', iv, tagLength: 16 })
   const len = readUInt32LE(bytes.subarray(0, 4))
   const cid = CID.decode(bytes.subarray(4, 4 + len))
