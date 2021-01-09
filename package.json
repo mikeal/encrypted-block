@@ -1,6 +1,6 @@
 {
   "name": "encrypted-block",
-  "version": "0.0.0",
+  "version": "0.0.0-dev",
   "description": "Encrypted IPLD blocks w/ AES",
   "main": "index.js",
   "type": "module",
