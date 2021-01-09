@@ -1,0 +1,22 @@
+{
+  "name": "encrypted-block",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (https://www.mikealrogers.com/)",
+  "license": "(Apache-2.0 AND MIT)",
+  "dependencies": {
+    "js-crypto-aes": "^1.0.0",
+    "multiformats": "^4.4.3"
+  },
+  "devDependencies": {
+    "hundreds": "0.0.9",
+    "mocha": "^8.2.1",
+    "standard": "^16.0.3"
+  }
+}
