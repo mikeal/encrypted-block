@@ -1,4 +1,4 @@
-import { randomBytes } from 'crypto'
+import randomBytes from 'randombytes'
 import aes from 'js-crypto-aes'
 import { CID } from 'multiformats'
 

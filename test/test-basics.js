@@ -1,13 +1,12 @@
 /* globals describe, it */
-import { encode, decode, crypto, name, code } from '../index.js'
+import { encode, decode, code, name, encrypt, decrypt, crypto } from '../index.js'
 import { sha256 as hasher } from 'multiformats/hashes/sha2'
-import raw from 'multiformats/codecs/raw'
-import { codec } from 'multiformats/codecs/codec'
+import * as raw from 'multiformats/codecs/raw'
 import { randomBytes } from 'crypto'
 import * as Block from 'multiformats/block'
 import { deepStrictEqual as same } from 'assert'
 
-const eb = codec({ encode, decode, name, code })
+const eb = { encode, decode, code, name, encrypt, decrypt, crypto }
 
 describe('encrypted-block', () => {
   it('encrypt/decrypt raw block', async () => {
