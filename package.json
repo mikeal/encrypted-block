@@ -20,7 +20,7 @@
   "license": "(Apache-2.0 AND MIT)",
   "dependencies": {
     "js-crypto-aes": "^1.0.0",
-    "multiformats": "^4.4.3"
+    "multiformats": "^11.0.1"
   },
   "devDependencies": {
     "hundreds": "0.0.9",
